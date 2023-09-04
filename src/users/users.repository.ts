@@ -4,7 +4,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
-export class UserSRepository {
+export class UsersRepository {
     constructor(private readonly prisma: PrismaService) { }
 
     async createUser(user: CreateUserDto) {
@@ -24,4 +24,11 @@ export class UserSRepository {
         })
     }
 
+    async getUserById(id: number){
+        return await this.prisma.users.findFirst({
+            where: {
+                id
+            }
+        })
+    }
 }

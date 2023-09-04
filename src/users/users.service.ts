@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserSRepository } from './users.repository';
+import { UsersRepository } from './users.repository';
 import { Users } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 export class UsersService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly usersRepository: UserSRepository
+    private readonly usersRepository: UsersRepository
   ){}
 
   async create(createUserDto: CreateUserDto) {
@@ -48,12 +48,17 @@ export class UsersService {
 
     return { token }
   }
-/*
+
   checkToken(token: string) {
     const data = this.jwtService.verify(token, {
       audience: "Driven",
       issuer: "users"
     });
     return data;
-  }*/
+  }
+
+  async getUserById(id: number){
+    const user = await this.usersRepository.getUserById(id);
+    return user;
+  }
 }

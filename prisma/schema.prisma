@@ -11,9 +11,9 @@ datasource db {
 }
 
 model Users {
-  id       Int    @unique @default(autoincrement())
-  email    String @unique
-  password String
+  id          Int           @unique @default(autoincrement())
+  email       String        @unique
+  password    String
 }
 
 model Credentials {
@@ -22,4 +22,5 @@ model Credentials {
   url    String
   user   String
   senha  String
+  userId Int
 }

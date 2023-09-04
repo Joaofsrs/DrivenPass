@@ -2,11 +2,12 @@ import { Global, Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { UserSRepository } from './users.repository';
+import { UsersRepository } from './users.repository';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
+@Global()
 @Module({
   imports: [
     JwtModule.register({
@@ -15,6 +16,7 @@ dotenv.config();
     PrismaModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, UserSRepository],
+  providers: [UsersService, UsersRepository],
+  exports: [UsersService],
 })
 export class UsersModule {}
