@@ -3,7 +3,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateCredentialDto } from "./dto/create-credential.dto";
 import Cryptr from "cryptr";
 import * as dotenv from 'dotenv';
-import { Users } from "@prisma/client";
 
 dotenv.config();
 @Injectable()
