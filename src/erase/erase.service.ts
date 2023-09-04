@@ -1,26 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateEraseDto } from './dto/create-erase.dto';
 import { UpdateEraseDto } from './dto/update-erase.dto';
+import { Users } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+import { CardsRepository } from 'src/cards/cards.repository';
+import { NotesRepository } from 'src/notes/notes.repository';
+import { UsersRepository } from 'src/users/users.repository';
+import { CredentialRepository } from 'src/credentials/credentials.repository';
 
 @Injectable()
 export class EraseService {
-  create(createEraseDto: CreateEraseDto) {
-    return 'This action adds a new erase';
-  }
-
-  findAll() {
-    return `This action returns all erase`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} erase`;
-  }
-
-  update(id: number, updateEraseDto: UpdateEraseDto) {
-    return `This action updates a #${id} erase`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} erase`;
+  constructor(
+    private readonly cardsRepository: CardsRepository,
+    private readonly notesRepository: NotesRepository,
+    private readonly usersRepository: UsersRepository,
+    private readonly credentialRepository: CredentialRepository
+  ) {}
+  async delete(createEraseDto: CreateEraseDto, user: Users) {
+    const validPassword = await bcrypt.compare(createEraseDto.senha, user.password);
+    if (!validPassword) {
+      throw new UnauthorizedException();
+    }
+    await this.cardsRepository.removeAllByUserId(user.id);
+    await this.notesRepository.removeAllByUserId(user.id);
+    await this.usersRepository.remove(user.id);
+    await this.credentialRepository.removeAllByUserId(user.id);
+    return "sucesso";
   }
 }

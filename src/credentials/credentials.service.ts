@@ -16,7 +16,7 @@ export class CredentialsService {
   }
 
   async create(createCredentialDto: CreateCredentialDto, user: Users) {
-    const credential = await this.credentialRepository.findCredentialByTitulo(createCredentialDto);
+    const credential = await this.credentialRepository.findCredentialByTituloUserId(createCredentialDto, user.id);
     if(credential){
       throw new ConflictException();
     }

@@ -34,6 +34,13 @@ export class CredentialRepository {
         })
     }
 
+    async findCredentialByTituloUserId(credential: CreateCredentialDto, userId: number) {
+        const { titulo } = credential;
+        return await this.prisma.credentials.findFirst({
+            where: { titulo, userId }
+        })
+    }
+
     async findAllByUserid(id: number){
         return await this.prisma.credentials.findMany({
             where: {
@@ -52,5 +59,11 @@ export class CredentialRepository {
         return await this.prisma.credentials.delete({
             where: {id}
         })
+    }
+
+    async removeAllByUserId(userId: number) {
+        return await this.prisma.credentials.deleteMany({
+            where: {userId}
+        })   
     }
 }

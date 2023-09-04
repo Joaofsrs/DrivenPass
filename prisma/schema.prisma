@@ -18,7 +18,7 @@ model Users {
 
 model Credentials {
   id     Int    @unique @default(autoincrement())
-  titulo String @unique
+  titulo String 
   url    String
   user   String
   senha  String
@@ -30,4 +30,16 @@ model Notes {
   titulo String
   note   String
   userId Int
+}
+
+model Cards {
+  id       Int    @unique @default(autoincrement())
+  titulo   String
+  number   Int
+  name     String
+  csv      Int
+  validade String
+  senha    String
+  tipo     String
+  userId   Int
 }

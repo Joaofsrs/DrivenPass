@@ -44,4 +44,10 @@ export class NotesRepository {
             where: {id}
         })   
     }
+
+    async removeAllByUserId(userId: number) {
+        return await this.prisma.notes.deleteMany({
+            where: {userId}
+        })   
+    }
 }
