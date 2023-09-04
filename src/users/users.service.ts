@@ -14,6 +14,7 @@ export class UsersService {
   ){}
 
   async create(createUserDto: CreateUserDto) {
+
     const userCreated = await this.usersRepository.findUserByEmail(createUserDto);
     if(userCreated){
       throw new ConflictException();

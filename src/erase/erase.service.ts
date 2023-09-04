@@ -3,10 +3,10 @@ import { CreateEraseDto } from './dto/create-erase.dto';
 import { UpdateEraseDto } from './dto/update-erase.dto';
 import { Users } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { CardsRepository } from 'src/cards/cards.repository';
-import { NotesRepository } from 'src/notes/notes.repository';
-import { UsersRepository } from 'src/users/users.repository';
-import { CredentialRepository } from 'src/credentials/credentials.repository';
+import { CardsRepository } from '../cards/cards.repository';
+import { NotesRepository } from '../notes/notes.repository';
+import { UsersRepository } from '../users/users.repository';
+import { CredentialRepository } from '../credentials/credentials.repository';
 
 @Injectable()
 export class EraseService {

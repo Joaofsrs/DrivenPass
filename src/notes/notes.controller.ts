@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
-import { User } from 'src/decorators/user.decorator';
-import { UserGuard } from 'src/guard/user.guard';
+import { User } from '../decorators/user.decorator';
+import { UserGuard } from '../guard/user.guard';
 import { Users } from '@prisma/client';
 
 

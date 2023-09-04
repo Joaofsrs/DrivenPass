@@ -5,7 +5,9 @@ import { UpdateCardDto } from './dto/update-card.dto';
 import { UserGuard } from '../guard/user.guard';
 import { User } from '../decorators/user.decorator';
 import { Users } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Cards')
 @UseGuards(UserGuard)
 @Controller('cards')
 export class CardsController {
